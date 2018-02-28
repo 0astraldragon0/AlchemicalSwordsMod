@@ -1,0 +1,15 @@
+[
+{
+  "modid": "aswords",
+  "name": "Alchemical Swords Mod",
+  "description": "A magic mod that add powerful swords swords",
+  "version": "1.0",
+  "mcversion": "1.10.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["0astralDragon0"],
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
