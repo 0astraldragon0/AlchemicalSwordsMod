@@ -110,14 +110,6 @@ public class WorldStructureGenerator extends WorldGenerator implements IWorldGen
 		int i = pos.getX();
 		int j = pos.getY();
 		int k = pos.getZ();
-		
-		for(int x=0;x<12 ;x++){
-        	for(int y=1;y<10 ;y++){
-            	for(int z=0;z<12 ;z++){
-            		world.setBlockToAir(pos.add(x,y,z));
-            	}
-        	}
-    	}
 
 		this.setBlockState(world, i + 0, j + 0, k + 5, AlchemicalSwords.runic_bricks, 0);
 		this.setBlockState(world, i + 0, j + 0, k + 6, AlchemicalSwords.runic_bricks, 0);

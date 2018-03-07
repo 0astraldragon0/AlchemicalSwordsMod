@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.astraldragon.AlchemicalSwordsMod.AlchemicalSwords;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -32,8 +33,8 @@ public class ItemPhilosopherStone extends Item {
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-		tooltip.add("an ancient gem ");
-		tooltip.add("full of alchemic power");
+		tooltip.add(I18n.format("lore.PhilosopherStone1.name"));
+		tooltip.add(I18n.format("lore.PhilosopherStone2.name"));
 	}
 	
 	@Override

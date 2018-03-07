@@ -1,5 +1,7 @@
 package com.astraldragon.AlchemicalSwordsMod;
 
+import java.util.List;
+
 import com.astraldragon.AlchemicalSwordsMod.blocks.BlockAlchemicalSoulSand;
 import com.astraldragon.AlchemicalSwordsMod.blocks.BlockRunicBricks;
 import com.astraldragon.AlchemicalSwordsMod.blocks.BlockSoulCrystal;
@@ -15,10 +17,12 @@ import com.astraldragon.AlchemicalSwordsMod.items.ItemIceSword;
 import com.astraldragon.AlchemicalSwordsMod.items.ItemNaturaSword;
 import com.astraldragon.AlchemicalSwordsMod.items.ItemPhilosopherStone;
 import com.astraldragon.AlchemicalSwordsMod.items.ItemSoulCrystal;
+import com.astraldragon.AlchemicalSwordsMod.items.ItemSoulSword;
 import com.astraldragon.AlchemicalSwordsMod.items.ItemWitherBone;
 import com.astraldragon.AlchemicalSwordsMod.proxy.CommonProxy;
 import com.astraldragon.AlchemicalSwordsMod.tileentities.TileEntityInfuser;
 import com.astraldragon.AlchemicalSwordsMod.world.WorldGeneratorMod;
+import com.google.common.collect.Lists;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -32,6 +36,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -54,6 +59,8 @@ public class AlchemicalSwords
 	public static final String VERSION = "1.0";
 	
 	public static final String INFUSING_UID = "AlchemicalSwords:InfuserCrafting";
+	
+	public static final List<Achievement> achievementsList = Lists.newArrayList();
 
 	public static Block alchemical_soul_sand;
 	public static Block infuser;
@@ -73,6 +80,7 @@ public class AlchemicalSwords
 	
 	public static ItemSword ender_sword;
 	public static ItemSword glass_sword;
+	public static ItemSword soul_sword;
 	public static ItemSword natura_sword;
 	public static ItemSword fire_sword;
 	public static ItemSword ice_sword;
@@ -81,6 +89,10 @@ public class AlchemicalSwords
 	
 	public static Achievement AchievmentAlchemicalAge;
 	public static Achievement AchievementMakeGlassIngot;
+	public static Achievement AchievementMakeFireIngot;
+	public static Achievement AchievementMakeIceIngot;
+	public static Achievement AchievementMakeNaturaIngot;
+	public static Achievement AchievementMakeEnderIngot;
 	
 	public static InfusingManager infusingManager;
 	
@@ -99,6 +111,7 @@ public class AlchemicalSwords
 		
 		proxy.registerObject();
 		
+		this.RegisterAchievements();
 		infusingManager = new InfusingManager();
 		}
 
@@ -113,13 +126,35 @@ public class AlchemicalSwords
 		proxy.dropEvent();
 	}
 	
+	public void RegisterAchievements(){
+		Achievement[] achievementArray = new Achievement[achievementsList.size()];
+		
+		for(Achievement achievement : achievementsList){
+			achievement.registerStat();
+			achievementArray[achievementsList.indexOf(achievement)] = achievement;
+		}
+    	AchievementPage.registerAchievementPage(new AchievementPage("AlchemicalSwords",achievementArray));
+
+		
+	}
+	
 	public void registerEntities(){
 		GameRegistry.registerTileEntity(TileEntityInfuser.class, "tile_entity_infuser");
 	}
 	
 	public void addAchievements(){
-		AchievmentAlchemicalAge = new Achievement("achievement.alchemicalage", "alchemicalage", 0, 0, soul_crystal,(Achievement)null);
-		AchievementMakeGlassIngot = new Achievement("achievement.makeglassingot", "makeglassingot", 2, 1, glass_ingot,AchievmentAlchemicalAge);
+		AchievmentAlchemicalAge = new Achievement("achievement.alchemicalage", "alchemicalage", 3, 0, soul_crystal,(Achievement)null);
+		achievementsList.add(AchievmentAlchemicalAge);
+		AchievementMakeGlassIngot = new Achievement("achievement.makeglassingot", "makeglassingot", 3, 2, glass_ingot,AchievmentAlchemicalAge);
+		achievementsList.add(AchievementMakeGlassIngot);
+		AchievementMakeFireIngot = new Achievement("achievement.makefireingot", "makefireingot", 1, 2, fire_ingot,AchievementMakeGlassIngot);
+		achievementsList.add(AchievementMakeFireIngot);
+		AchievementMakeIceIngot = new Achievement("achievement.makeiceingot", "makeiceingot",2,4, ice_ingot,AchievementMakeGlassIngot);
+		achievementsList.add(AchievementMakeIceIngot);
+		AchievementMakeEnderIngot = new Achievement("achievement.makeenderingot", "makeenderingot",4,4, ender_ingot,AchievementMakeGlassIngot);
+		achievementsList.add(AchievementMakeEnderIngot);
+		AchievementMakeNaturaIngot = new Achievement("achievement.makenaturaingot", "makenaturaingot", 5, 2, natura_ingot,AchievementMakeGlassIngot);
+		achievementsList.add(AchievementMakeNaturaIngot);
 	}
 	
 	public void addMaterials(){
@@ -139,13 +174,14 @@ public class AlchemicalSwords
 		//wither_bone = new ItemWitherBone();
 		glass_ingot = new ItemGlassIngot();
 		philosopher_stone = new ItemPhilosopherStone();
-		ender_ingot = new ItemAlchemicalIngot().setUnlocalizedName("ender_ingot");
-		ice_ingot = new ItemAlchemicalIngot().setUnlocalizedName("ice_ingot");
-		fire_ingot = new ItemAlchemicalIngot().setUnlocalizedName("fire_ingot");
-		natura_ingot = new ItemAlchemicalIngot().setUnlocalizedName("natura_ingot");
+		ender_ingot = new ItemAlchemicalIngot(0).setUnlocalizedName("ender_ingot");
+		ice_ingot = new ItemAlchemicalIngot(1).setUnlocalizedName("ice_ingot");
+		fire_ingot = new ItemAlchemicalIngot(2).setUnlocalizedName("fire_ingot");
+		natura_ingot = new ItemAlchemicalIngot(3).setUnlocalizedName("natura_ingot");
 		
 		ender_sword = new ItemEnderSword(AlchemicalSwords.AlchemicIngot);
 		glass_sword = new ItemGlassSword(AlchemicalSwords.AlchemicIngot);
+		soul_sword = new ItemSoulSword(AlchemicalSwords.AlchemicIngot);
 		natura_sword = new ItemNaturaSword(AlchemicalSwords.AlchemicIngot);
 		fire_sword = new ItemFireSword(AlchemicalSwords.AlchemicIngot);
 		ice_sword = new ItemIceSword(AlchemicalSwords.AlchemicIngot);
@@ -189,6 +225,7 @@ public class AlchemicalSwords
 	GameRegistry.registerItem(fire_sword, "fire_sword");
 	GameRegistry.registerItem(natura_sword, "natura_sword");
 	GameRegistry.registerItem(glass_sword, "glass_sword");
+	GameRegistry.registerItem(soul_sword, "soul_sword");
 	GameRegistry.registerItem(glass_ingot, "glass_ingot");
 	GameRegistry.registerItem(ice_sword, "ice_sword");
 	GameRegistry.registerItem(philosopher_stone, "philosopher_stone");
@@ -214,6 +251,7 @@ public class AlchemicalSwords
 		ModelLoader.setCustomModelResourceLocation(fire_sword, 0, new ModelResourceLocation(MODID + ":" + "fire_sword", "inventory"));		
 		ModelLoader.setCustomModelResourceLocation(ice_sword, 0, new ModelResourceLocation(MODID + ":" + "ice_sword", "inventory"));		
 		ModelLoader.setCustomModelResourceLocation(glass_sword, 0, new ModelResourceLocation(MODID + ":" + "glass_sword", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(soul_sword, 0, new ModelResourceLocation(MODID + ":" + "soul_sword", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(glass_ingot, 0, new ModelResourceLocation(MODID + ":" + "glass_ingot", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(philosopher_stone, 0, new ModelResourceLocation(MODID + ":" + "philosopher_stone", "inventory"));		
 		ModelLoader.setCustomModelResourceLocation(ender_ingot, 0, new ModelResourceLocation(MODID + ":" + "ender_ingot", "inventory"));	

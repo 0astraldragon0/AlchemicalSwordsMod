@@ -18,9 +18,7 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent e) {
-    	AlchemicalSwords.AchievmentAlchemicalAge.registerStat();
-    	AlchemicalSwords.AchievementMakeGlassIngot.registerStat();
-    	AchievementPage.registerAchievementPage(new AchievementPage("Alchemical Swords Achievements",new Achievement[] {AlchemicalSwords.AchievmentAlchemicalAge,AlchemicalSwords.AchievementMakeGlassIngot}));
+    	
     }
 
     public void postInit(FMLPostInitializationEvent e) {

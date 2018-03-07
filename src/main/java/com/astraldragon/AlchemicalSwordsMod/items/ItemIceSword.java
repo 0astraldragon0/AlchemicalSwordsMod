@@ -6,6 +6,7 @@ import java.util.Random;
 import com.astraldragon.AlchemicalSwordsMod.AlchemicalSwords;
 import com.astraldragon.AlchemicalSwordsMod.entities.EntitySnowballAS;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -55,8 +56,9 @@ public class ItemIceSword extends ItemSword {
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-		tooltip.add("has a 50% chance to slow the enemy");
-		tooltip.add("right-click to throw a snowball that damage and slow the enemies");
+		tooltip.add((I18n.format("lore.IceSword1.name")));
+		
+		tooltip.add(I18n.format("lore.IceSword2.name"));
 	}
 	
 	@Override

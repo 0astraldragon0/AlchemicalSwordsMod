@@ -30,6 +30,7 @@ public class InfusingManager {
 		this.addInfusingRecipe(new ItemStack(AlchemicalSwords.natura_ingot),"GGG","LIG","LEE",'G',Blocks.TALLGRASS,'E',Items.EMERALD,'L',Blocks.LEAVES,'I',AlchemicalSwords.glass_ingot);
 		this.addInfusingRecipe(new ItemStack(AlchemicalSwords.fire_ingot),"BBB","LGB","FFF",'B',Items.BLAZE_POWDER,'L',Items.LAVA_BUCKET,'F',Items.FIRE_CHARGE,'G',AlchemicalSwords.glass_ingot);
 		this.addInfusingRecipe(new ItemStack(AlchemicalSwords.ice_ingot),"III","PGI","PPD",'I',Blocks.ICE,'P',Blocks.PACKED_ICE,'D',Items.DIAMOND,'G',AlchemicalSwords.glass_ingot);
+		this.addInfusingRecipe(new ItemStack(AlchemicalSwords.soul_sword),"CBC","BSB","CBC",'C',AlchemicalSwords.soul_crystal,'B',AlchemicalSwords.soul_crystal_block,'S',AlchemicalSwords.glass_sword);
 	}
 	
 	

@@ -11,6 +11,7 @@ import java.util.Random;
 
 import com.astraldragon.AlchemicalSwordsMod.AlchemicalSwords;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -60,8 +61,8 @@ public class ItemNaturaSword extends ItemSword {
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-		tooltip.add("has a 50% chance to poison the enemy");
-		tooltip.add("make you stronger and faster on grass");
+		tooltip.add(I18n.format("lore.NaturaSword1.name"));
+		tooltip.add(I18n.format("lore.NaturaSword2.name"));
 	}
 	
 	@Override

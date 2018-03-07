@@ -10,41 +10,42 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFireSword extends ItemSword {
+public class ItemSoulSword extends ItemSword {
 
-	public ItemFireSword(ToolMaterial material) {
+	public ItemSoulSword(ToolMaterial material) {
 		super(material);
 		this.setCreativeTab(AlchemicalSwords.ASwordsTab);
-		this.setUnlocalizedName("fire_sword");
+		this.setUnlocalizedName("soul_sword");
 	}
+	
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
+    {
+        if (repair.getItem() instanceof ItemGlassIngot) return true;
+        return false;
+    }
 	
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
 		super.hitEntity(stack, target, attacker);
 		
-		if(target.isBurning()){
-			target.attackEntityFrom(DamageSource.inFire, 2);
+		Random r = new Random();
+		
+		if(target.getHealth() == 0 && r.nextInt(20) == 0){
+			target.dropItem(AlchemicalSwords.soul_crystal, 1);
 		}
 		
-       target.setFire(4);
-       return true;
+		return true;
     }
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-		tooltip.add(I18n.format("lore.FireSword1.name"));
-		tooltip.add(I18n.format("lore.FireSword2.name"));
+		tooltip.add(I18n.format("lore.SoulSword1.name"));
 	}
 	
-	@Override
-	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
-    {
-        if (repair.getItem() == AlchemicalSwords.fire_ingot) return true;
-        return false;
-    }
 }

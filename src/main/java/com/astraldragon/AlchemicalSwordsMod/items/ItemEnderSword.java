@@ -6,6 +6,7 @@ import java.util.Random;
 import com.astraldragon.AlchemicalSwordsMod.AlchemicalSwords;
 import com.astraldragon.AlchemicalSwordsMod.entities.EntityEnderPearlAS;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -15,6 +16,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class ItemEnderSword extends ItemSword {
@@ -59,8 +61,8 @@ public class ItemEnderSword extends ItemSword {
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-		tooltip.add("random teleport entities that hit");
-		tooltip.add("right-click to throw the weapon");
+		tooltip.add(I18n.format("lore.EnderSword1.name"));
+		tooltip.add(I18n.format("lore.EnderSword2.name"));
 	}
 	
 	@Override
